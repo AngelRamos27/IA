@@ -10,8 +10,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler
 
 
-modelN_path='C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/model_game.h5'
-modelTree_path='C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/model_gameTree.joblib'
+modelN_path='C:/Users/angel/OneDrive/Escritorio/IA/game/model_game.h5'
+modelTree_path='C:/Users/angel/OneDrive/Escritorio/IA/game/model_gameTree.joblib'
 
 #modelo = joblib.load(modelTree_path)
 modelo=load_model(modelN_path)
@@ -59,17 +59,17 @@ frame_predict_interval = 5
 
 # Cargar las imágenes
 jugador_frames = [
-    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/sprites/mono_frame_1.png'),
-    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/sprites/mono_frame_2.png'),
-    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/sprites/mono_frame_3.png'),
-    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/sprites/mono_frame_4.png')
+    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/sprites/mono_frame_1.png'),
+    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/sprites/mono_frame_2.png'),
+    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/sprites/mono_frame_3.png'),
+    pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/sprites/mono_frame_4.png')
 ]
 
 
-bala_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/sprites/purple_ball.png')
-fondo_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/game/fondo2.png')
-nave_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/game/ufo.png')
-menu_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/assets/game/menu.png')
+bala_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/sprites/purple_ball.png')
+fondo_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/game/fondo2.png')
+nave_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/game/ufo.png')
+menu_img = pygame.image.load('C:/Users/angel/OneDrive/Escritorio/IA/game/assets/game/menu.png')
 
 # Escalar la imagen de fondo para que coincida con el tamaño de la pantalla
 fondo_img = pygame.transform.scale(fondo_img, (w, h))
@@ -181,7 +181,7 @@ def guardar_datos():
 
 def exporta_cv():
     df_rrss=pd.DataFrame(datos_modelo)
-    df_rrss.to_csv('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/dataset.csv',index=False,sep=',')
+    df_rrss.to_csv('C:/Users/angel/OneDrive/Escritorio/IA/game/dataset.csv',index=False,sep=',')
 
 # Función para reentrenar s red neuronal
 def reentrenar_modeloo():
@@ -194,7 +194,7 @@ def reentrenar_modeloo():
 
     # Reentrenar el modelo
     nuevo_modelo.fit(X_nuevos, y_nuevos, epochs=50, batch_size=10, verbose=1)
-    nuevo_modelo.save('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/model_game.h5')
+    nuevo_modelo.save('C:/Users/angel/OneDrive/Escritorio/IA/game/model_game.h5')
     print("Modelo reentrenado y guardado.")
 
 
@@ -281,9 +281,9 @@ def mostrar_menu():
                     menu_activo = False
                 elif evento.key == pygame.K_g:
                     exporta_cv()
-                    exec(open("C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/grafica.py").read())
+                    exec(open("C:/Users/angel/OneDrive/Escritorio/IA/game/grafica.py").read())
                 # elif evento.key == pygame.K_t:
-                #    with open("C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/decisionTree.py", encoding="utf-8") as file:
+                #    with open("C:/Users/angel/OneDrive/Escritorio/IA/game/decisionTree.py", encoding="utf-8") as file:
                 #     exec(file.read())    
                 elif evento.key == pygame.K_q:
                      if not modo_auto:

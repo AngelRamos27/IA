@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # Cargar los datos desde el CSV especificando que la primera fila es un encabezado
-df = pd.read_csv('C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/dataset.csv', header=None, names=['x1', 'x2', 'target'], dtype=float)
+df = pd.read_csv('C:/Users/angel/OneDrive/Escritorio/IA/game/dataset.csv', header=None, names=['x1', 'x2', 'target'], dtype=float)
 # Crear la figura 3D
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')

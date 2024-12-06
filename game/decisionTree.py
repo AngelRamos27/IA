@@ -5,7 +5,7 @@ import graphviz
 import joblib
 
 # Cargar el dataset
-file_path = 'C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/dataset.csv'
+file_path = 'C:/Users/angel/OneDrive/Escritorio/IA/games/dataset.csv'
 dataset = pd.read_csv(file_path, header=None)
 
 # Verificar si hay valores NaN en el conjunto de datos
