@@ -14,7 +14,7 @@ modelN_path='C:/Users/angel/OneDrive/Escritorio/IA/game/model_game.h5'
 modelTree_path='C:/Users/angel/OneDrive/Escritorio/IA/game/model_gameTree.joblib'
 
 #modelo = joblib.load(modelTree_path)
-modelo=load_model(modelN_path)
+#modelo=load_model(modelN_path)
 
 
 # Inicializar Pygame
@@ -184,21 +184,22 @@ def exporta_cv():
     df_rrss.to_csv('C:/Users/angel/OneDrive/Escritorio/IA/game/dataset.csv',index=False,sep=',')
 
 # Función para reentrenar s red neuronal
-def reentrenar_modeloo():
+def reentrenar_modelo():
     X_nuevos = np.array([d[:2] for d in datos_modelo])
     y_nuevos = np.array([d[2] for d in datos_modelo])
-
     # Crear y compilar el modelo nuevamente
+    X_train, X_test, y_train, y_test = train_test_split(X_nuevos, y_nuevos, test_size=0.2, random_state=42)
+
     nuevo_modelo = Sequential([Dense(4, input_dim=2, activation='relu'), Dense(1, activation='sigmoid')])
     nuevo_modelo.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    nuevo_modelo.fit(X_train, y_train, epochs=50, batch_size=10, verbose=1)
 
     # Reentrenar el modelo
-    nuevo_modelo.fit(X_nuevos, y_nuevos, epochs=50, batch_size=10, verbose=1)
     nuevo_modelo.save('C:/Users/angel/OneDrive/Escritorio/IA/game/model_game.h5')
     print("Modelo reentrenado y guardado.")
 
 
-def reentrenar_modelo(): # reentrenar arbol
+def reentrenar_modeloo(): # reentrenar arbol
     datos_nuevos=datos_modelo
     dataset = pd.DataFrame(datos_nuevos, columns=['Feature 1', 'Feature 2', 'Label'])
     X = dataset[['Feature 1', 'Feature 2']]  
@@ -215,8 +216,8 @@ def reentrenar_modelo(): # reentrenar arbol
 
      
 # Función para obtener la predicción y tomar acción
-def modo_automaticoo(): #neuro
-    model=load_model(modelN_path)
+def modo_automatico(): #neuro
+    modelo=load_model(modelN_path)
     global salto, en_suelo, frame_predict_counter
     if frame_predict_counter % frame_predict_interval == 0:
         distancia = abs(jugador.x - bala.x)
@@ -229,7 +230,7 @@ def modo_automaticoo(): #neuro
             print("salto")
     frame_predict_counter += 1 
     
-def modo_automatico():#tree
+def modo_automaticoo():#tree
     modelo = joblib.load(modelTree_path)  # Verifica si el modelo está cargado correctamente
     global salto, en_suelo, frame_predict_counter
     if frame_predict_counter % frame_predict_interval == 0:
@@ -242,7 +243,7 @@ def modo_automatico():#tree
             en_suelo = False
             print("Salto")
         else:
-            print("No saltar: Predicción menor o igual a 0.5")
+            print("No saltar")
 
     frame_predict_counter += 1
 
@@ -252,7 +253,7 @@ def pausa_juego():
     pausa = not pausa
     if pausa:
         print("Juego pausado. Datos registrados hasta ahora:", datos_modelo)
-        reentrenar_modelo() 
+        if not modo_auto:reentrenar_modelo() 
         mostrar_menu() 
     else:
         print("Juego reanudado.")
