@@ -4,7 +4,7 @@ from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
-file_path = 'C:/Users/angel/OneDrive/Escritorio/IA/pygamesc/dataset.csv'
+file_path = 'C:/Users/angel/OneDrive/Escritorio/IA/game/dataset.csv'
 dataset = pd.read_csv(file_path)
 
 X = dataset.iloc[:, :2].values  # Select the first two columns for features
