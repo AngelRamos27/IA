@@ -36,7 +36,7 @@ def redimensionar_imagenes(directorio_entrada, directorio_salida, ancho=80, alto
                 print(f"Error procesando {nombre_archivo}: {e}")
 
 if __name__ == "__main__":
-    directorio_entrada = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset3/bmw318d"  # Cambia esto por la ruta de tu directorio de entrada
-    directorio_salida = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset3/bmw318dd"    # Cambia esto por la ruta de tu directorio de salida
+    directorio_entrada = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset4/c"  # Cambia esto por la ruta de tu directorio de entrada
+    directorio_salida = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset4/c/w"    # Cambia esto por la ruta de tu directorio de salida
 
     redimensionar_imagenes(directorio_entrada, directorio_salida, ancho=80, alto=80)

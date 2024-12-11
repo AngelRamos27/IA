@@ -34,8 +34,8 @@ def rename_files(folder_path, base_name, start_number, increment):
         print(f"Error: {e}")
 
 # Usage
-folder_path = r"C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset/bmw330e"  # Cambia esta ruta a tu carpeta
-base_name = "bmw330i_"
+folder_path = r"C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset4/bmw318d"  # Cambia esta ruta a tu carpeta
+base_name = "bmw318d_"
 start_number = 000
 increment = 1
 

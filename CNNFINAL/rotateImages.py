@@ -21,8 +21,8 @@ def process_images_with_mirror_and_upside_down(input_dir, output_dir):
                 mirrored_img.save(os.path.join(output_dir, f"{os.path.splitext(filename)[0]}_mirror{os.path.splitext(filename)[1]}"))
 
                 # Crear imagen rotada de cabeza (180 grados)
-                upside_down_img = img.rotate(180)
-                upside_down_img.save(os.path.join(output_dir, f"{os.path.splitext(filename)[0]}_upside_down{os.path.splitext(filename)[1]}"))
+              #  upside_down_img = img.rotate(180)
+               # upside_down_img.save(os.path.join(output_dir, f"{os.path.splitext(filename)[0]}_upside_down{os.path.splitext(filename)[1]}"))
 
                 print(f"Procesado: {filename}")
 
@@ -31,7 +31,7 @@ def process_images_with_mirror_and_upside_down(input_dir, output_dir):
 
 
 # Ruta del directorio de entrada y salida
-input_directory = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset/bmw330e"
-output_directory = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset/bmw330eFull"
+input_directory = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset4/tsuru1"
+output_directory = "C:/Users/angel/OneDrive/Escritorio/IA/CNNFINAL/dataset4/tsuru1Full"
 
 process_images_with_mirror_and_upside_down(input_directory, output_directory)

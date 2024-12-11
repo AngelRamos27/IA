@@ -64,13 +64,14 @@ class Nodo: # clase que definea tributos y métodos del noto
     def __lt__(self, otro):
         return False
 
-def heuristica(nodo1, nodo2, grid, penalizacion_obstaculo=10): # función para el calculo de la heuristica, distancia entre dos puntos
+def heuristica(nodo1, nodo2, grid, penalizacion_obstaculo=10):
     x1, y1 = nodo1.fila, nodo1.col
     x2, y2 = nodo2.fila, nodo2.col
 
-    distancia = abs(x1 - x2) + abs(y1 - y2)
+    distancia = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
     if grid[x2][y2].es_pared():
-        distancia *= penalizacion_obstaculo # si o si se detiene en una pared
+        distancia *= penalizacion_obstaculo
 
     return distancia
 
