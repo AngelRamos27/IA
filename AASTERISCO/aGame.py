@@ -1,11 +1,11 @@
 import pygame
-import math
 from queue import PriorityQueue
+from typing import  List
 
 # Configuraciones iniciales
 pygame.init()
 
-ANCHO_VENTANA = 800
+ANCHO_VENTANA = 500
 VENTANA = pygame.display.set_mode((ANCHO_VENTANA, ANCHO_VENTANA))
 pygame.display.set_caption("Visualización de Nodos")
 font = pygame.font.SysFont(None, 48)
@@ -17,6 +17,11 @@ VERDE = (0, 255, 0)
 ROJO = (255, 0, 0)
 NARANJA = (255, 165, 0)
 PURPURA = (128, 0, 128)
+AZUL = (0, 0, 255)
+
+
+costDiag = 1.4
+costRect = 1.0
 
 class Nodo:
     def __init__(self, fila, col, ancho, total_filas):
@@ -61,37 +66,51 @@ class Nodo:
         self.color = VERDE
 
     def hacer_camino(self):
-        self.color = PURPURA
+        self.color = AZUL
 
     def dibujar(self, ventana):
         pygame.draw.rect(ventana, self.color, (self.x, self.y, self.ancho, self.ancho))
 
-    def actualizar_vecinos(self, grid):
+    def actualizar_vecinos(self, grid: List[List["Nodo"]], filas: int):
         self.vecinos = []
         # Movimiento hacia abajo
         if self.fila < self.total_filas - 1 and not grid[self.fila + 1][self.col].es_pared():
-            self.vecinos.append(grid[self.fila + 1][self.col])
+            self.vecinos.append((grid[self.fila + 1][self.col], costRect))
         # Movimiento hacia arriba
         if self.fila > 0 and not grid[self.fila - 1][self.col].es_pared():
-            self.vecinos.append(grid[self.fila - 1][self.col])
+            self.vecinos.append((grid[self.fila - 1][self.col], costRect))
         # Movimiento hacia la derecha
         if self.col < self.total_filas - 1 and not grid[self.fila][self.col + 1].es_pared():
-            self.vecinos.append(grid[self.fila][self.col + 1])
+            self.vecinos.append((grid[self.fila][self.col + 1], costRect))
         # Movimiento hacia la izquierda
         if self.col > 0 and not grid[self.fila][self.col - 1].es_pared():
-            self.vecinos.append(grid[self.fila][self.col - 1])
+            self.vecinos.append((grid[self.fila][self.col - 1], costRect))
+
         # Movimiento diagonal: abajo-derecha
-        if self.fila < self.total_filas - 1 and self.col < self.total_filas - 1 and not grid[self.fila + 1][self.col + 1].es_pared():
-            self.vecinos.append(grid[self.fila + 1][self.col + 1])
+        if (self.fila < self.total_filas - 1 and self.col < self.total_filas - 1 and
+            not grid[self.fila + 1][self.col + 1].es_pared() and
+            (not grid[self.fila + 1][self.col].es_pared() or not grid[self.fila][self.col + 1].es_pared())):
+            self.vecinos.append((grid[self.fila + 1][self.col + 1], costDiag))
+
         # Movimiento diagonal: abajo-izquierda
-        if self.fila < self.total_filas - 1 and self.col > 0 and not grid[self.fila + 1][self.col - 1].es_pared():
-            self.vecinos.append(grid[self.fila + 1][self.col - 1])
+        if (self.fila < self.total_filas - 1 and self.col > 0 and
+            not grid[self.fila + 1][self.col - 1].es_pared() and
+            (not grid[self.fila + 1][self.col].es_pared() or not grid[self.fila][self.col - 1].es_pared())):
+            self.vecinos.append((grid[self.fila + 1][self.col - 1], costDiag))
+
         # Movimiento diagonal: arriba-derecha
-        if self.fila > 0 and self.col < self.total_filas - 1 and not grid[self.fila - 1][self.col + 1].es_pared():
-            self.vecinos.append(grid[self.fila - 1][self.col + 1])
+        if (self.fila > 0 and self.col < self.total_filas - 1 and
+            not grid[self.fila - 1][self.col + 1].es_pared() and
+            (not grid[self.fila - 1][self.col].es_pared() or not grid[self.fila][self.col + 1].es_pared())):
+            self.vecinos.append((grid[self.fila - 1][self.col + 1], costDiag))
+
         # Movimiento diagonal: arriba-izquierda
-        if self.fila > 0 and self.col > 0 and not grid[self.fila - 1][self.col - 1].es_pared():
-            self.vecinos.append(grid[self.fila - 1][self.col - 1])
+        if (self.fila > 0 and self.col > 0 and
+            not grid[self.fila - 1][self.col - 1].es_pared() and
+            (not grid[self.fila - 1][self.col].es_pared() or not grid[self.fila][self.col - 1].es_pared())):
+            self.vecinos.append((grid[self.fila - 1][self.col - 1], costDiag))
+
+
 
 def crear_grid(filas, ancho):
     grid = []
@@ -165,8 +184,8 @@ def algoritmo_a(dibujar, grid, inicio, fin):
             inicio.hacer_inicio()
             return True
 
-        for vecino in actual.vecinos:
-            temp_g_score = g_score[actual] + 1
+        for vecino, costo in actual.vecinos:
+            temp_g_score = g_score[actual] + costo
 
             if temp_g_score < g_score[vecino]:
                 came_from[vecino] = actual
@@ -234,7 +253,7 @@ def main(ventana, ancho):
                 if event.key == pygame.K_SPACE and inicio and fin:
                     for fila in grid:
                         for nodo in fila:
-                            nodo.actualizar_vecinos(grid)
+                            nodo.actualizar_vecinos(grid,FILAS)
 
                     if algoritmo_a(lambda: dibujar(ventana, grid, FILAS, ancho), grid, inicio, fin):
                        display_message("¡Salida encontrada!")
