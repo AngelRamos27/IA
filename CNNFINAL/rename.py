@@ -1,3 +1,4 @@
+#herramienta para renombrar imagenes
 import os
 
 def rename_files(folder_path, base_name, start_number, increment):
