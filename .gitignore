@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /CNNFINAL/dataset
 /CNNFINAL/dataset2
 /CNNFINAL/dataset4
@@ -10002,3 +10003,16 @@ CNNFINAL/datasetNuevo/dataset/bmw318dFull/bmw318d_03329_rotated_135.jpg
 CNNFINAL/datasetNuevo/dataset/bmw318dFull/bmw318d_03330_original.jpg
 C N N F I N A L / d a t a s e t . r a r  
  
+=======
+/CNNFINAL/dataset
+/CNNFINAL/dataset2
+/CNNFINAL/dataset4
+/CNNFINAL/dataset3
+/CNNFINAL/videos
+/CNNFINALcnn
+/LenguajeNatural/autonomos
+/LenguajeNatural/judicial
+/LenguajeNatural/pdfs
+/LenguajeNatural/resultados.txt
+
+>>>>>>> 185c5487524bd0a75cc6120110ec6579e126f685
