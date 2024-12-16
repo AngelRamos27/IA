@@ -10001,7 +10001,8 @@ CNNFINAL/datasetNuevo/dataset/bmw318dFull/bmw318d_03329_original.jpg
 CNNFINAL/datasetNuevo/dataset/bmw318dFull/bmw318d_03329_rotated_45.jpg
 CNNFINAL/datasetNuevo/dataset/bmw318dFull/bmw318d_03329_rotated_135.jpg
 CNNFINAL/datasetNuevo/dataset/bmw318dFull/bmw318d_03330_original.jpg
-C N N F I N A L / d a t a s e t . r a r  
+C N N F I N A L / d a t a s e t . r a r 
+ 
  
 =======
 /CNNFINAL/dataset
@@ -10010,8 +10011,8 @@ C N N F I N A L / d a t a s e t . r a r  
 /CNNFINAL/dataset3
 /CNNFINAL/videos
 /CNNFINALcnn
-/LenguajeNatural/autonomos
-/LenguajeNatural/judicial
+LenguajeNatural/autonomos
+LenguajeNatural/judicial
 /LenguajeNatural/pdfs
 /LenguajeNatural/resultados.txt
 
